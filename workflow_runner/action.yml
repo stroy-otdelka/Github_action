@@ -8,6 +8,10 @@ inputs:
   workflow_name:
     description: ""
     required: true
+  branch:
+    description: ""
+    required: false
+    default: "main"
 
 
 runs:
@@ -25,4 +29,4 @@ runs:
       - name: run workflow ${{inputs.workflow_name}}
         shell: bash
         run: |
-          ./.github/workflow_runner/workflow_runner.py ${{inputs.token}} ${{inputs.workflow_name}}
+          ./.github/workflow_runner/workflow_runner.py ${{inputs.token}} ${{inputs.workflow_name}} ${{inputs.branch}}
