@@ -1,0 +1,28 @@
+name: "workflow_runner"
+description: ""
+
+inputs:
+  token:
+    description: ""
+    required: true
+  workflow_name:
+    description: ""
+    required: true
+
+
+runs:
+  using: "composite"
+  steps:
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: install requests
+        shell: bash
+        run: pip install requests==2.31.0
+
+      - name: run workflow ${{inputs.workflow_name}}
+        shell: bash
+        run: |
+          ./.github/workflow_runner/workflow_runner.py ${{inputs.token}} ${{inputs.workflow_name}}

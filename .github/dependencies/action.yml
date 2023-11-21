@@ -1,0 +1,40 @@
+name: "Install dependencies"
+description: ""
+
+inputs:
+  python-version:
+    description: "version of python that will be installed"
+    required: true
+  poetry-version:
+    description: "version of poetry that will be installed"
+    required: true
+  service:
+    description: "service name"
+    required: true
+
+
+runs:
+  using: "composite"
+  steps:
+    - name: get code from repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ inputs.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: cache python dep
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cache/pypoetry
+          poetry.lock
+        key: ${{ hashFiles('**/poetry.lock') }}
+
+    - name: install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      shell: bash
+      run: |
+        pip install poetry==${{inputs.poetry-version}}
+        make -C ${{inputs.service}} install

@@ -1,0 +1,41 @@
+name: "ssh delivery"
+description: ""
+
+
+inputs:
+  remote_user:
+    required: true
+    description: ""
+  remote_host:
+    required: true
+    description: ""
+  remote_port:
+    required: false
+    description: ""
+    default: "22"
+  ssh_private_key:
+    required: true
+    description: ""
+  target:
+    required: false
+    description: ""
+    default: "/home/${{inputs.remote_user}}"
+
+runs:
+  using: composite
+
+  steps:
+    - name: set up ssh key
+      shell: bash
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{inputs.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H -p ${{inputs.REMOTE_PORT}} ${{inputs.REMOTE_HOST}} >> ~/.ssh/known_hosts
+
+    - name: deliver project to remote server
+      shell: bash
+      run: |
+        scp -o StrictHostKeyChecking=no \
+        -P ${{inputs.REMOTE_PORT}} \
+        -r $PWD ${{inputs.REMOTE_USER}}@${{inputs.REMOTE_HOST}}:${{inputs.TARGET}}
