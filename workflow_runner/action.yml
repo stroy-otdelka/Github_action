@@ -30,6 +30,4 @@ runs:
       - name: run workflow ${{inputs.workflow_name}}
         shell: bash
         run: |
-          echo "${{github.action_path}}"
-          ls -l ${{github.action_path}}
-#          ./workflow_runner.py ${{inputs.token}} ${{inputs.workflow_name}} ${{inputs.branch}}
+          ${{github.action_path}}/workflow_runner.py ${{inputs.token}} ${{inputs.workflow_name}} ${{inputs.branch}}
