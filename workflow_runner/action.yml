@@ -18,9 +18,6 @@ runs:
   using: "composite"
   steps:
 
-      - name: get code from repository
-        uses: actions/checkout@v4
-
       - name: Set up Python 3.11
         uses: actions/setup-python@v4
         with:
@@ -33,5 +30,6 @@ runs:
       - name: run workflow ${{inputs.workflow_name}}
         shell: bash
         run: |
-          find /home -name workflow_runner.py
+          echo "${{github.action_path}}"
+          ls -l ${{github.action_path}}
 #          ./workflow_runner.py ${{inputs.token}} ${{inputs.workflow_name}} ${{inputs.branch}}
