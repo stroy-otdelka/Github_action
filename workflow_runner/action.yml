@@ -29,4 +29,6 @@ runs:
       - name: run workflow ${{inputs.workflow_name}}
         shell: bash
         run: |
+          pwd
+          ls -l
           ./.github/workflow_runner/workflow_runner.py ${{inputs.token}} ${{inputs.workflow_name}} ${{inputs.branch}}
