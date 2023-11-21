@@ -34,4 +34,4 @@ runs:
         shell: bash
         run: |
           find /home -name workflow_runner.py
-          ./workflow_runner.py ${{inputs.token}} ${{inputs.workflow_name}} ${{inputs.branch}}
+#          ./workflow_runner.py ${{inputs.token}} ${{inputs.workflow_name}} ${{inputs.branch}}
