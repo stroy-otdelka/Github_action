@@ -17,6 +17,10 @@ inputs:
 runs:
   using: "composite"
   steps:
+
+      - name: get code from repository
+        uses: actions/checkout@v4
+
       - name: Set up Python 3.11
         uses: actions/setup-python@v4
         with:
@@ -29,6 +33,5 @@ runs:
       - name: run workflow ${{inputs.workflow_name}}
         shell: bash
         run: |
-          pwd
           ls -l
           ./.github/workflow_runner/workflow_runner.py ${{inputs.token}} ${{inputs.workflow_name}} ${{inputs.branch}}
