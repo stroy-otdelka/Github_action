@@ -36,5 +36,5 @@ runs:
     - name: run command
       shell: bash
       run: |
-        sudo ssh -p  ${{inputs.REMOTE_PORT}} ${{inputs.REMOTE_USER}}@${{inputs.REMOTE_HOST}} \
+        ssh -p  ${{inputs.REMOTE_PORT}} ${{inputs.REMOTE_USER}}@${{inputs.REMOTE_HOST}} \
         '${{inputs.command}}'
