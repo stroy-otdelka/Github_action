@@ -1,0 +1,31 @@
+name: "ssh delivery"
+description: ""
+
+
+inputs:
+  command:
+    required: true
+    description: ""
+  remote_user:
+    required: true
+    description: ""
+  remote_host:
+    required: true
+    description: ""
+  remote_port:
+    required: false
+    description: ""
+    default: "22"
+  ssh_private_key:
+    required: true
+    description: ""
+
+runs:
+  using: composite
+
+  steps:
+    - name: run command
+      shell: bash
+      run: |
+        ssh -p ${{secrets.REMOTE_PORT}} ${{secrets.REMOTE_USER}}@${{secrets.REMOTE_HOST}} \
+        '${{inputs.command}}'
