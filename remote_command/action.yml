@@ -24,8 +24,17 @@ runs:
   using: composite
 
   steps:
+
+    - name: set up ssh key
+      shell: bash
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{inputs.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H -p ${{inputs.REMOTE_PORT}} ${{inputs.REMOTE_HOST}} >> ~/.ssh/known_hosts
+
     - name: run command
       shell: bash
       run: |
-        ssh -p ${{secrets.REMOTE_PORT}} ${{secrets.REMOTE_USER}}@${{secrets.REMOTE_HOST}} \
+        ssh -p  ${{inputs.REMOTE_PORT}} ${{inputs.REMOTE_USER}}@${{inputs.REMOTE_HOST}} \
         '${{inputs.command}}'
