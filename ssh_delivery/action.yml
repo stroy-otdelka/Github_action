@@ -36,7 +36,7 @@ runs:
     - name: deliver project to remote server
       shell: bash
       run: |
-        sudo chown -R user:1000 $PWD
+        sudo chown -R $USER:1000 $PWD
         scp -o StrictHostKeyChecking=no \
         -P ${{inputs.REMOTE_PORT}} \
         -r $PWD ${{inputs.REMOTE_USER}}@${{inputs.REMOTE_HOST}}:${{inputs.TARGET}}
