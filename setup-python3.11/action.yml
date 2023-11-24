@@ -13,8 +13,8 @@ runs:
 
     - name: install python 3.11
       shell: bash
-      run: sudo apt install python3.11
+      run: sudo apt install python3.11 -y
 
     - name: install pip
       shell: bash
-      run: sudo apt install python3-pip
+      run: sudo apt install python3-pip -y
