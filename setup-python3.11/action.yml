@@ -8,7 +8,7 @@ runs:
     - name: add repository
       shell: bash
       run: |
-        sudo add-apt-repository ppa:deadsnakes/ppa
+        sudo add-apt-repository ppa:deadsnakes/ppa -y
         sudo apt update -y && sudo apt upgrade -y
 
     - name: install python 3.11
