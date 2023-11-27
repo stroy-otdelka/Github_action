@@ -27,7 +27,8 @@ runs:
     - name: set up ssh key
       shell: bash
       run: |
-        mkdir ~/.ssh
+        echo ${{inputs.remote_port}}
+        mkdir -p ~/.ssh
         echo "${{inputs.ssh_private_key}}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H -p ${{inputs.remote_port}} ${{inputs.remote_host}} >> ~/.ssh/known_hosts
