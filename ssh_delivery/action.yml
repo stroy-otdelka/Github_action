@@ -17,9 +17,8 @@ inputs:
     required: true
     description: ""
   target:
-    required: false
+    required: true
     description: ""
-    default: "/home/${{inputs.remote_user}}"
 
 runs:
   using: composite
