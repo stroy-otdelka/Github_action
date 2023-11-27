@@ -28,14 +28,14 @@ runs:
       shell: bash
       run: |
         mkdir -p ~/.ssh
-        echo "${{inputs.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
+        echo "${{inputs.ssh_private_key}}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H -p ${{inputs.REMOTE_PORT}} ${{inputs.REMOTE_HOST}} >> ~/.ssh/known_hosts
+        ssh-keyscan -H -p ${{inputs.remote_port}} ${{inputs.remote_host}} >> ~/.ssh/known_hosts
 
     - name: deliver project to remote server
       shell: bash
       run: |
         sudo chown -R $USER:1000 $PWD
         sudo scp -o StrictHostKeyChecking=no \
-        -P ${{inputs.REMOTE_PORT}} \
-        -r $PWD ${{inputs.REMOTE_USER}}@${{inputs.REMOTE_HOST}}:${{inputs.TARGET}}
+        -P ${{inputs.remote_port}} \
+        -r $PWD ${{inputs.remote_user}}@${{inputs.remote_host}}:${{inputs.target}}
