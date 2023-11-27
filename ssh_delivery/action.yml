@@ -36,7 +36,6 @@ runs:
       shell: bash
       run: |
         sudo chown -R $USER:1000 $PWD
-        sudo scp -i ~/.ssh/id_rsa \
-        -o StrictHostKeyChecking=no \
+        scp -o StrictHostKeyChecking=no \
         -P ${{inputs.remote_port}} \
         -r $PWD ${{inputs.remote_user}}@${{inputs.remote_host}}:${{inputs.target}}
